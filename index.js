@@ -36,14 +36,14 @@ restService.post('/query', function (req, res) {
         return res.json({
             speech: speech,
             displayText: speech,
-            source: 'lucid'
+            source: 'lucid-cern'
         });
     } catch (err) {
         console.error("Can't process request", err);
 
-        return res.status(123).json({
+        return res.status(400).json({
             status: {
-                code: 123,
+                code: 400,
                 errorType: err.message
             }
         });
