@@ -41,9 +41,9 @@ restService.post('/hook', function (req, res) {
     } catch (err) {
         console.error("Can't process request", err);
 
-        return res.status(400).json({
+        return res.status(123).json({
             status: {
-                code: 400,
+                code: 123,
                 errorType: err.message
             }
         });
