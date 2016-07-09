@@ -1,0 +1,16 @@
+{
+  "name": "lucid-bot",
+  "version": "1.0.0",
+  "description": "lucid",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhishek Shenoy (https://api.ai)",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4"
+  }
+}
