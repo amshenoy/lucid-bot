@@ -21,7 +21,6 @@ restService.post('/hook', function (req, res) {
             if (requestBody.result) {
                 speech = '';
                 if (requestBody.result.fulfillment) {
-                    speech = requestBody.result.parameters;
                     speech = requestBody.result.fulfillment.speech;
                     speech += ' ';
                 }
