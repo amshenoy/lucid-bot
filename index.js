@@ -1,5 +1,7 @@
 'use strict';
 
+document.write('<scr'+'ipt type="text/javascript" src="https://raw.githubusercontent.com/shashwatak/satellite-js/master/dist/satellite.js" ></scr'+'ipt>');
+
 //var satrec = satellite.twoline2satrec(longstr1, longstr2);
 //var positionAndVelocity = satellite.sgp4(satrec, epochTime);
 
