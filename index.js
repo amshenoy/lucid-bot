@@ -1,5 +1,8 @@
 'use strict';
 
+//var satrec = satellite.twoline2satrec(longstr1, longstr2);
+//var positionAndVelocity = satellite.sgp4(satrec, epochTime);
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
