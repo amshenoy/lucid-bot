@@ -5,72 +5,70 @@ var satrec = satellite.twoline2satrec("1 40076U 14037H   16193.11632849  .000000
 var positionAndVelocity = satellite.sgp4(satrec, "1468220000");
 
 
-    //  Or you can use a calendar date and time (obtained from Javascript Date).
-    var now = new Date();
-    // NOTE: while Javascript Date returns months in range 0-11, all satellite.js methods require
-    // months in range 1-12.
-    var positionAndVelocity = satellite.propagate(
-        satrec,
-        now.getUTCFullYear(),
-        now.getUTCMonth() + 1, // Note, this function requires months in range 1-12.
-        now.getUTCDate(),
-        now.getUTCHours(),
-        now.getUTCMinutes(),
-        now.getUTCSeconds()
-    );
+//  Or you can use a calendar date and time (obtained from Javascript Date).
+var now = new Date();
+// NOTE: while Javascript Date returns months in range 0-11, all satellite.js methods require
+// months in range 1-12.
+var positionAndVelocity = satellite.propagate(
+    satrec,
+    now.getUTCFullYear(),
+    now.getUTCMonth() + 1, // Note, this function requires months in range 1-12.
+    now.getUTCDate(),
+    now.getUTCHours(),
+    now.getUTCMinutes(),
+    now.getUTCSeconds()
+);
 
-    // The position_velocity result is a key-value pair of ECI coordinates.
-    // These are the base results from which all other coordinates are derived.
-    var positionEci = positionAndVelocity.position,
-        velocityEci = positionAndVelocity.velocity;
+// The position_velocity result is a key-value pair of ECI coordinates.
+// These are the base results from which all other coordinates are derived.
+var positionEci = positionAndVelocity.position,
+    velocityEci = positionAndVelocity.velocity;
 
-    // Set the Observer at 122.03 West by 36.96 North, in RADIANS
-    var observerGd = {
-        longitude: -122.0308 * deg2rad,
-        latitude: 36.9613422 * deg2rad,
-        height: 0.370
-    };
+// Set the Observer at 122.03 West by 36.96 North, in RADIANS
+var observerGd = {
+    longitude: -122.0308 * deg2rad,
+    latitude: 36.9613422 * deg2rad,
+    height: 0.370
+};
 
-    // You will need GMST for some of the coordinate transforms.
-    // http://en.wikipedia.org/wiki/Sidereal_time#Definition
-    // NOTE: GMST, though a measure of time, is defined as an angle in radians.
-    // Also, be aware that the month range is 1-12, not 0-11.
-    var gmst = satellite.gstimeFromDate(
-        now.getUTCFullYear(),
-        now.getUTCMonth() + 1, // Note, this function requires months in range 1-12.
-        now.getUTCDate(),
-        now.getUTCHours(),
-        now.getUTCMinutes(),
-        now.getUTCSeconds()
-    );
+ var now = new Date();
+// You will need GMST for some of the coordinate transforms
+//var gmst = getGMST( now );
+var gmst = satellite.gstimeFromDate(
+		now.getUTCFullYear(),
+		now.getUTCMonth() + 1, // Note, this function requires months in range 1-12.
+		now.getUTCDate(),
+		now.getUTCHours(),
+		now.getUTCMinutes(),
+		now.getUTCSeconds()
+	);
 
-    // You can get ECF, Geodetic, Look Angles, and Doppler Factor.
-    var positionEcf   = satellite.eciToEcf(positionEci, gmst),
-        observerEcf   = satellite.geodeticToEcf(observerGd),
-        positionGd    = satellite.eciToGeodetic(positionEci, gmst),
-        lookAngles    = satellite.ecfToLookAngles(observerGd, positionEcf),
-        dopplerFactor = satellite.dopplerFactor(observerCoordsEcf, positionEcf, velocityEcf);
+// You can get ECF, Geodetic, Look Angles, and Doppler Factor.
+var position_ecf   = satellite.eciToEcf (position_eci, gmst);
+var observer_ecf   = satellite.geodeticToEcf (observer_gd);
+var position_gd    = satellite.eciToGeodetic (position_eci, gmst);
+var look_angles    = satellite.ecfToLookAngles (observer_gd, position_ecf);
+//var doppler_factor = satellite.dopplerFactor (observer_ecf, position_ecf, velocity_ecf);
 
-    // The coordinates are all stored in key-value pairs.
-    // ECI and ECF are accessed by `x`, `y`, `z` properties.
-    var satelliteX = positionEci.x,
-        satelliteY = positionEci.y,
-        satelliteZ = positionEci.z;
+// The coordinates are all stored in key-value pairs.
+// ECI and ECF are accessed by "x", "y", "z".
+var satellite_x = position_eci["x"];
+var satellite_y = position_eci["y"];
+var satellite_z = position_eci["z"];
 
-    // Look Angles may be accessed by `azimuth`, `elevation`, `range_sat` properties.
-    var azimuth   = lookAngles.azimuth,
-        elevation = lookAngles.elevation,
-        rangeSat  = lookAngles.rangeSat;
+// Look Angles may be accessed by "azimuth", "elevation", "range_sat".
+var azimuth   = look_angles["azimuth"];
+var elevation = look_angles["elevation"];
+var rangeSat  = look_angles["rangeSat"];
 
-    // Geodetic coords are accessed via `longitude`, `latitude`, `height`.
-    var longitude = positionGd.longitude,
-        latitude  = positionGd.latitude,
-        height    = positionGd.height;
+// Geodetic coords are accessed via "longitude", "latitude", "height".
+var longitude = position_gd["longitude"];
+var latitude  = position_gd["latitude"];
+var height    = position_gd["height"];
 
-    //  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W". etc).
-    var long = satellite.degreesLong(longitude),
-        lat  = satellite.degreesLat(latitude);
-        
+//  Convert the RADIANS to DEGREES for pretty printing (appends "N", "S", "E", "W". etc).
+var lng = satellite.degreesLong (longitude);
+var lat = satellite.degreesLat  (latitude);
 
 
 const express = require('express');
