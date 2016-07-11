@@ -51,7 +51,6 @@ restService.post('/hook', function (req, res) {
         return res.json({
             speech: speech,
             displayText: speech,
-            data: {"facebook": {"text": "hello world"}},
             source: 'lucid-cern'
         });
     } catch (err) {
