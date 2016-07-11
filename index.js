@@ -15,18 +15,30 @@ restService.post('/hook', function (req, res) {
     console.log('hook request');
 
     try {
+        var speech = 'empty speech';
+
         if (req.body) {
             var requestBody = req.body;
 
             if (requestBody.result) {
                 speech = '';
+
                 if (requestBody.result.fulfillment) {
-                    speech = requestBody.result.fulfillment.speech;
+                    speech += requestBody.result.fulfillment.speech;
                     speech += ' ';
                 }
 
                 if (requestBody.result.action) {
-                    speech += 'action: ' + requestBody.result.action;
+                    speech += 'action: ' + requestBody.result.action + ' ';
+                }
+
+                var parameters = requestBody.result.parameters;
+                if (parameters){
+                    for (var p in parameters){
+                        if(parameters.hasOwnProperty(p) ) {
+                            speech += p + ": " + parameters[p] + "; ";
+                        }
+                    }
                 }
             }
         }
@@ -36,7 +48,8 @@ restService.post('/hook', function (req, res) {
         return res.json({
             speech: speech,
             displayText: speech,
-            source: 'lucid-cern'
+            source: 'lucid-cern',
+            "data": {"facebook": {'<facebook_message>'}},
         });
     } catch (err) {
         console.error("Can't process request", err);
