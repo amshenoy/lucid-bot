@@ -24,8 +24,8 @@ restService.post('/hook', function (req, res) {
                 speech = '';
 
                 if (requestBody.result.fulfillment) {
-                    speech += requestBody.result.fulfillment.speech;
-                    speech += ' ';
+                    //speech += requestBody.result.fulfillment.speech;
+                    speech += 'Testing ';
                 }
 
                 if (requestBody.result.action) {
@@ -49,7 +49,7 @@ restService.post('/hook', function (req, res) {
             speech: speech,
             displayText: speech,
             source: 'lucid-cern',
-            data: {"facebook":{"text":"hello kid"}}
+            data: {"facebook":{"text":"fb"+speech}}
         });
     } catch (err) {
         console.error("Can't process request", err);
