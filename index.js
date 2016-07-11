@@ -3,6 +3,24 @@
 //var satrec = satellite.twoline2satrec(longstr1, longstr2);
 //var positionAndVelocity = satellite.sgp4(satrec, epochTime);
 
+function loadScript(url, callback)
+{
+    // Adding the script tag to the head as suggested before
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+
+    // Fire the loading
+    head.appendChild(script);
+}
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
