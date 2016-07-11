@@ -1,12 +1,7 @@
 'use strict';
 
-const satellite = require('satellite');
-var satrec = satellite.twoline2satrec("1 40076U 14037H   16193.11632849  .00000081  00000-0  17714-4 0  9999", "2 40076  98.3253 285.0231 0007283  88.4641 271.7401 14.81202642108530");
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
-
 
 const restService = express();
 restService.use(bodyParser.json());
