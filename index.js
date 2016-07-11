@@ -82,7 +82,7 @@ restService.post('/hook', function (req, res) {
             speech: speech,
             displayText: speech,
             source: 'lucid-cern',
-            "data": {"facebook": messageData}
+            data: {"facebook": messageData}
         });
     } catch (err) {
         console.error("Can't process request", err);
