@@ -1,5 +1,6 @@
 'use strict';
 
+satellite = require('satellite.js');
 //var satrec = satellite.twoline2satrec(longstr1, longstr2);
 //var positionAndVelocity = satellite.sgp4(satrec, epochTime);
 
