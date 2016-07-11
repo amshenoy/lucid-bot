@@ -10,6 +10,19 @@ const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
 
+
+restService.get('/', function (req, res) {
+	res.send('LUCID - Langton Ultimate Cosmic Ray Intensity Detector');
+})
+
+// for facebook verification
+restService.get('/hook/', function (req, res) {
+	if (req.query['hub.verify_token'] === 'lucid_is_awesome') {
+		res.send(req.query['hub.challenge']);
+	}
+	res.send('Error, wrong token');
+})
+
 restService.post('/hook', function (req, res) {
 
     console.log('hook request');
