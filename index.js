@@ -10,9 +10,6 @@ const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
 
-
-messageData =
-	
 restService.post('/hook', function (req, res) {
 
     console.log('hook request');
@@ -51,7 +48,8 @@ restService.post('/hook', function (req, res) {
         return res.json({
             speech: speech,
             displayText: speech,
-            source: 'lucid-cern'
+            source: 'lucid-cern',
+            data: {"facebook":{"text":"hello kid"}}
         });
     } catch (err) {
         console.error("Can't process request", err);
