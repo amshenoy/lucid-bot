@@ -4,30 +4,6 @@
 //var satrec = satellite.twoline2satrec(longstr1, longstr2);
 //var positionAndVelocity = satellite.sgp4(satrec, epochTime);
 
-function loadScript(url, callback)
-{
-    // Adding the script tag to the head as suggested before
-    var head = document.getElementsByTagName('head')[0];
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = url;
-
-    // Then bind the event to the callback function.
-    // There are several events for cross browser compatibility.
-    script.onreadystatechange = callback;
-    script.onload = callback;
-
-    // Fire the loading
-    head.appendChild(script);
-}
-
-var myPrettyCode = function() {
-    var satrec = satellite.twoline2satrec("1 40076U 14037H   16193.11632849  .00000081  00000-0  17714-4 0  9999", "2 40076  98.3253 285.0231 0007283  88.4641 271.7401 14.81202642108530");
-    var positionAndVelocity = satellite.sgp4(satrec, epochTime);
-};
-
-loadScript("satellite.js", myPrettyCode);
-
 
 const express = require('express');
 const bodyParser = require('body-parser');
